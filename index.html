@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Deep-Insights.js | Elections Dashboard</title>
+    <meta name=viewport content="width=device-width initial-scale=1">
+    <link rel="stylesheet" href="dist/themes/css/deep-insights.css" />
+    <script src="dist/deep-insights.uncompressed.js"></script>
+    <style type="text/css">
+      html, body {
+        position:relative;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      .CDB-Dashboard-menuActions {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dashboard"></div>
+
+
+    <script>
+
+      window.onload = function() {
+        var vizJSON = {
+          "title": "Tickets set in Madrid along February 2015",
+          "description": "The infowindows show extra info about the ticket (time, complainant, and type). The monetary value all fines sums up to **17,525,900€** for 177,974 tickets. Source: https://datos.madrid.es",
+          "user": {
+            "fullname": "Emilio García",
+            "avatar_url": "https://s3.amazonaws.com/com.cartodb.users-assets.production/production/piensaenpixel/assets/20150507074635Captura%20de%20pantalla%202015-05-07%20a%20la%28s%29%2009.46.28.png"
+          },
+          "updated_at": "2016-02-23T07:56:47+00:00",
+
+          "widgets": [
+            {
+              "id": "suma",
+              "type": "formula",
+              "title": "Cantidad de multas",
+              "layer_id": "d7b83bbe-61be-49e9-9b37-748b502f56ef",
+              "options": {
+                "column": "cartodb_id",
+                "operation": "sum",
+                "suffix": ""
+              }
+            } ,
+            {
+              "id": "denunciante-category",
+              "type": "category",
+              "title": "Denunciante",
+              "layer_id": "d7b83bbe-61be-49e9-9b37-748b502f56ef",
+              "options": {
+                "column": "denunciante",
+                "aggregation": "count",
+                "show_stats": false
+              }
+            } ,
+           
+            {
+              "id": "suma",
+              "type": "formula",
+              "title": "Suma de las multas",
+              "layer_id": "d7b83bbe-61be-49e9-9b37-748b502f56ef",
+              "options": {
+                "column": "imp_bol",
+                "operation": "sum",
+                "suffix": " €"
+              }
+            } ,
+            {
+              "id": "media",
+              "type": "formula",
+              "title": "Media de las multas",
+              "layer_id": "d7b83bbe-61be-49e9-9b37-748b502f56ef",
+              "options": {
+                "column": "imp_bol",
+                "operation": "avg",
+                "suffix": " €"
+              }
+            },
+            {
+              "id": "tipo-calificacion",
+              "type": "category",
+              "title": "Tipo de calificación",
+              "layer_id": "d7b83bbe-61be-49e9-9b37-748b502f56ef",
+              "options": {
+                "column": "calificacion",
+                "aggregation": "count",
+                "show_stats": false
+              }
+            },
+            {
+              "id": "puntos",
+              "type": "histogram",
+              "title": "Rango de puntos",
+              "layer_id": "d7b83bbe-61be-49e9-9b37-748b502f56ef",
+              "options": {
+                "column": "puntos",
+                "bins": 5
+              }
+            }
+            /*,
+{
+              "id": "comunidad",
+              "type": "category",
+              "title": "Comunidad",
+              "layer_id": "4ddc1749-9ce2-4ce8-a031-187c7415bce0",
+              "options": {
+                "column": "comunidad",
+                "aggregation": "count",
+                "show_stats": true
+              }
+            },
+            {
+              "id": "age-histogram",
+              "type": "histogram",
+              "title": "Rangos de edad de ganadores",
+              "layer_id": "4ddc1749-9ce2-4ce8-a031-187c7415bce0",
+              "options": {
+                "column": "edad_media",
+                "bins": 5
+              }
+            },
+            {
+              "id": "avg-age-formula",
+              "type": "formula",
+              "title": "Media de edad de votantes",
+              "layer_id": "4ddc1749-9ce2-4ce8-a031-187c7415bce0",
+              "options": {
+                "column": "edad_media",
+                "operation": "avg",
+                "suffix": " años"
+              }
+            },
+ 
+            {
+              "id": "percent-winner",
+              "type": "formula",
+              "title": "Media porcentaje del ganador",
+              "layer_id": "4ddc1749-9ce2-4ce8-a031-187c7415bce0",
+              "options": {
+                "column": "porcentaje_ganador",
+                "operation": "avg",
+                "suffix": " %"
+               // "description": "Average of mean delays."
+              }
+            },
+            {
+              "id": "municipio",
+              "type": "category",
+              "title": "Municipio",
+              "layer_id": "4ddc1749-9ce2-4ce8-a031-187c7415bce0",
+              "options": {
+                "column": "nombre",
+                "aggregation": "count",
+                "show_stats": true
+              }
+            }*/
+
+          ],
+
+          "datasource": {
+            "user_name": "piensaenpixel",
+            "maps_api_template": "https://{user}.cartodb.com:443",
+            "force_cors": true, // This is sometimes set in the editor,
+            "stat_tag": "2aecee6a-daeb-11e5-9414-0e674067d321"
+          },
+
+"id": "2aecee6a-daeb-11e5-9414-0e674067d321",
+"version": "0.1.0",
+"title": "Tickets set in Madrid along February 2015 v2",
+"likes": 0,
+"description": "<p>The infowindows show extra info about the ticket (time, complainant, and type). The monetary value all fines sums up  to <strong>17,525,900€</strong> for 177,974 tickets. Source: https://datos.madrid.es</p>\n",
+"scrollwheel": false,
+"legends": false,
+"url": null,
+"map_provider": "leaflet",
+"bounds": [
+[
+40.37702072916623,
+-3.7870216369628906
+],
+[
+40.45504597310796,
+-3.5353660583496094
+]
+],
+"center": "[40.416044661266945, -3.66119384765625]",
+"zoom": 13,
+"updated_at": "2016-02-24T13:32:21+00:00",
+"layers": [
+{
+"options": {
+"visible": true,
+"type": "Tiled",
+"name": "Positron",
+"className": "positron_rainbow_labels",
+"base_type": "default",
+"urlTemplate": "http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
+"minZoom": "0",
+"maxZoom": "18",
+"attribution": "&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors &copy; <a href= \"http://cartodb.com/attributions\">CartoDB</a>",
+"subdomains": "abcd",
+"style": null,
+"labels": {
+"url": "http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png"
+},
+"read_only": true,
+"category": "CartoDB",
+"order": 0,
+"id": "7075bf1f-cbff-4dfb-9a28-49640b833569"
+},
+"infowindow": null,
+"tooltip": null,
+"id": "fc19a716-596b-4fde-bdbd-0d101e3ef464",
+"order": 0,
+"type": "tiled"
+},
+{
+"type": "layergroup",
+"options": {
+"user_name": "piensaenpixel",
+"maps_api_template": "https://{user}.cartodb.com:443",
+"sql_api_template": "https://{user}.cartodb.com:443",
+"tiler_protocol": "http",
+"tiler_domain": "cartodb.com",
+"tiler_port": "80",
+"sql_api_protocol": "http",
+"sql_api_domain": "cartodb.com",
+"sql_api_endpoint": "/api/v2/sql",
+"sql_api_port": 80,
+"filter": "mapnik",
+"layer_definition": {
+"stat_tag": "2aecee6a-daeb-11e5-9414-0e674067d321",
+"version": "1.0.1",
+"layers": [
+{
+"id": "d7b83bbe-61be-49e9-9b37-748b502f56ef",
+"type": "CartoDB",
+"infowindow": {
+"fields": [
+{
+"name": "hora",
+"title": true,
+"position": 0
+},
+{
+"name": "denunciante",
+"title": true,
+"position": 2
+},
+{
+"name": "calificacion",
+"title": true,
+"position": 6
+}
+],
+"template_name": "table/views/infowindow_light",
+"template": "<div class=\"cartodb-popup v2\">\n  <a href=\"#close\" class=\"cartodb-popup-close-button close\">x</a>\n  <div class=\"cartodb-popup-content-wrapper\">\n    <div class=\"cartodb-popup-content\">\n      {{#content.fields}}\n        {{#title}}<h4>{{title}}</h4>{{/title}}\n        {{#value}}\n          <p {{#type}}class=\"{{ type }}\"{{/type}}>{{{ value }}}</p>\n        {{/value}}\n        {{^value}}\n          <p class=\"empty\">null</p>\n        {{/value}}\n      {{/content.fields}}\n    </div>\n  </div>\n  <div class=\"cartodb-popup-tip-container\"></div>\n</div>\n",
+"alternative_names": {},
+"width": 226,
+"maxHeight": 180
+},
+"tooltip": {
+"fields": [],
+"template_name": "tooltip_light",
+"template": "<div class=\"cartodb-tooltip-content-wrapper\">\n  <div class=\"cartodb-tooltip-content\">\n  {{#fields}}\n    {{#title}}\n    <h4>{{title}}</h4>\n    {{/title}}\n    <p>{{{ value }}}</p>\n  {{/fields}}\n  </div>\n</div>",
+"alternative_names": {},
+"maxHeight": 180
+},
+"legend": {
+"type": "custom",
+"show_title": false,
+"title": "",
+"template": "",
+"visible": true,
+"items": [
+{
+"name": "Agentes de movilidad",
+"visible": true,
+"value": "#ffa300",
+"sync": true
+},
+{
+"name": "Policia Municipal",
+"visible": true,
+"value": "#1f78b4",
+"sync": true
+},
+{
+"name": "Sace (Servicio de Apoyo al Control de Estacionamiento)",
+"visible": true,
+"value": "#f84f40",
+"sync": true
+},
+{
+"name": "SER (Servicio de Estacionamiento Regulado)",
+"visible": true,
+"value": "#7b00b4",
+"sync": true
+}
+]
+},
+"order": 1,
+"visible": true,
+"options": {
+"sql": "select * from multas_febrero_2015",
+"layer_name": "multas_febrero_2015",
+"cartocss": "/** category visualization */\n\n#multas_febrero_2015 {\n   marker-fill-opacity: 1;\n   marker-line-color: #FFF;\n   marker-line-width: 0;\n   marker-line-opacity: 0;\n   marker-placement: point;\n   marker-type: ellipse;\n   marker-allow-overlap: true;\n  [zoom <= 12]{\n   marker-width: .5; \n  }\n   [zoom = 13]{\n   marker-width: 1.8; \n  }\n   [zoom = 14]{\n   marker-width: 2.5; \n  }\n   [zoom >= 15]{\n   marker-width: 3; \n  }\n}\n\n#multas_febrero_2015[denunciante=\"AGENTES DE MOVILIDAD\"] {\n   marker-fill: #ff8a00;\n}\n#multas_febrero_2015[denunciante=\"POLICIA MUNICIPAL\"] {\n   marker-fill: #0b9f95;\n}\n#multas_febrero_2015[denunciante=\"SACE\"] {\n   marker-fill: #ff528c;\n}\n#multas_febrero_2015[denunciante=\"SER\"] {\n  marker-fill: #41599c;\n}\n\n",
+"cartocss_version": "2.1.1",
+"interactivity": "cartodb_id",
+"table_name": "\"\"."
+}
+}
+]
+},
+"attribution": ""
+}
+},
+{
+"options": {
+"visible": true,
+"type": "Tiled",
+"name": "Positron Labels",
+"urlTemplate": "http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png",
+"attribution": "&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors &copy; <a href= \"http://cartodb.com/attributions\">CartoDB</a>",
+"minZoom": "0",
+"maxZoom": "18",
+"subdomains": "abcd",
+"kind": "tiled",
+"order": 2
+},
+"infowindow": null,
+"tooltip": null,
+"id": "12c02fe7-0f83-4032-b7e8-189836a48f5c",
+"order": 2,
+"type": "tiled"
+}
+],
+"overlays": [
+{
+"type": "share",
+"order": 2,
+"options": {
+"display": true,
+"x": 20,
+"y": 20
+},
+"template": ""
+},
+{
+"type": "search",
+"order": 3,
+"options": {
+"display": true,
+"x": 60,
+"y": 20
+},
+"template": ""
+},
+{
+"type": "zoom",
+"order": 6,
+"options": {
+"display": true,
+"x": 20,
+"y": 20
+},
+"template": "<a href=\"#zoom_in\" class=\"zoom_in\">+</a> <a href=\"#zoom_out\" class=\"zoom_out\">-</a>"
+},
+{
+"type": "loader",
+"order": 8,
+"options": {
+"display": true,
+"x": 20,
+"y": 150
+},
+"template": "<div class=\"loader\" original-title=\"\"></div>"
+},
+{
+"type": "logo",
+"order": 9,
+"options": {
+"display": true,
+"x": 10,
+"y": 40
+},
+"template": ""
+}
+],
+"prev": null,
+"next": null,
+"transition_options": {
+"time": 0
+}
+        };
+
+        var dashboard = cartodb.deepInsights.createDashboard('#dashboard', vizJSON, {
+          no_cdn: false,
+          cartodb_logo: false
+        });
+        dashboard.vis.done(function(v, l) {
+          window.dashboard = dashboard
+
+          var vLayers = v.getLayers()[1]
+          var layers = l.models[1].layers
+
+        })
+        .error(function(err) {
+          console.error(err)
+        });
+      }
+    </script>
+  </body>
+</html>
